@@ -46,6 +46,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         >
+
         <TextView
             android:id="@+id/login_pw_tv"
             android:layout_width="80dp"

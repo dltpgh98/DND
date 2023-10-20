@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">DND</string>
+    <string name="app_name">동내북</string>
+    <string name="StringValue">이미지가 열리지 않습니다.</string>
+    <string name="setting_header_text">설정</string>
+    <string name="subway_header_text">지하철 노선도</string>
+    <string name="user_name">유저명</string>
+    <string name="test">test</string>
+    <string name="name_info_window">Info Window</string>
+    <string name="description_info_window">정보 창</string>
+    <string name="todo">TODO</string>
+    <string name="status">●</string>
+    <string name="personal_processing_header">개인정보 처리방침</string>
+    <string name="terms_conditions_header">이용약관</string>
+    <string name="find_history">최근내역</string>
 </resources>
