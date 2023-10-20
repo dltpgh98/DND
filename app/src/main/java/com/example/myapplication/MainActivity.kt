@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
 /*
         setContentView(R.layout.activity_main)
-
+        //seho
         txt_id.setOnClickListener{
             val text1 = txt_id.text.toString()
         }
