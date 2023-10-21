@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="15dp"
-        android:src=""/>
+        android:src="@drawable/book_banner"/>
     <TextView
         android:id="@+id/main_banner_log_tv"
         android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
             android:layout_width="30sp"
             android:layout_height="match_parent"
             android:background="#00000000"
-            android:layout_marginStart="5dp"
+
             android:contentDescription="@string/StringValue"
             android:src="@drawable/ic_search"
             />  <!--검색 버튼-->
@@ -40,9 +40,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
-            android:inputType="text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" /> <!--검색창-->
+            android:inputType="text"/> <!--검색창-->
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
