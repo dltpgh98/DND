@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ItemData.MainBook_Item
 import com.example.ViewHolderAdapter.MainRecyView_CustomAdapter
@@ -29,7 +30,8 @@ class MainActivity : AppCompatActivity() {
         val adapter = MainRecyView_CustomAdapter(book_ItemList)
         main_book_list_rv.adapter = adapter
         main_book_list_rv.adapter = MainRecyView_CustomAdapter(book_ItemList)
-        main_book_list_rv.layoutManager = LinearLayoutManager(this)
+//        main_book_list_rv.layoutManager = LinearLayoutManager(this)
+        main_book_list_rv.layoutManager = GridLayoutManager(this,2)
 
         adapter.itemClick = object : MainRecyView_CustomAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
