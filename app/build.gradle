@@ -45,6 +45,7 @@ dependencies {
     implementation files('libs\\jtds-1.2.7.jar')
     implementation files('libs\\mssql-jdbc-12.4.1.jre11.jar')
     implementation "com.microsoft.sqlserver:mssql-jdbc:9.4.1.jre8"
+    implementation files('libs\\mssql-jdbc-12.4.1.jre11.jar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
