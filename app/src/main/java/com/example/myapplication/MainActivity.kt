@@ -10,11 +10,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        //seho
-        txt_id.setOnClickListener{
-            val text1 = txt_id.text.toString()
-        }
+        setContentView(R.layout.main_frame)
 
 
     }
