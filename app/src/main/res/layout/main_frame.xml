@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <ImageView
         android:id="@+id/main_banner_iv"
@@ -14,6 +15,9 @@
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:text="사용자 접속 시간: 2xx3.xx.x2 xx:xx"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         android:layout_marginTop="-30dp"
         android:layout_marginRight="10dp"
         android:layout_gravity="right"
@@ -48,11 +52,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+    <ImageButton
         android:id="@+id/main_floating_fbtn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="-40dp"
         android:layout_marginRight="10dp"
-        android:layout_gravity="right|bottom"/>
+        android:background="@drawable/ic_baseline_star_24"
+        android:layout_gravity="right|bottom"
+        app:fabSize="normal"/>
 </LinearLayout>
