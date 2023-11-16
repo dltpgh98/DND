@@ -46,9 +46,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation files('libs\\jtds-1.2.7.jar')
-    //implementation files('libs\\mssql-jdbc-12.4.1.jre11.jar')
+    implementation 'net.sourceforge.jtds:jtds:1.2.7'
     implementation "com.microsoft.sqlserver:mssql-jdbc:9.4.1.jre8"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    implementation 'com.squareup.retrofit2:retrofit:2.6.4'          // Retrofit 라이브러리
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.4'    // Gson 변환기 라이브러리
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'   // moshi 변환기 라이브러리
+    implementation 'com.squareup.retrofit2:converter-scalars:2.6.4' // Scalars 변환기 라이브러리
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
