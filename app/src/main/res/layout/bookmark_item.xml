@@ -185,6 +185,7 @@
 
             />
         <TextView
+            android:id="@+id/bookmark_info_tv"
             android:layout_width="60dp"
             android:layout_height="25dp"
             android:background="@drawable/radious_layout"
@@ -199,6 +200,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             />
         <TextView
+            android:id="@+id/"
             android:layout_width="40dp"
             android:layout_height="25dp"
             android:background="@drawable/radious_layout"
