@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity(){
         setContentView(R.layout.login)
 
         // 기본 URL
-        val BASE_URL = "http://172.16.104.69:8000/"
+        val BASE_URL = "http://172.16.114.196:8000/"
 
         // Retrofit 인터페이스를 구현한 서비스 인스턴스 생성 함수
         fun createRetrofitService(): RetrofitService {
@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity(){
                                 val userAge: Int = userInfo.userAge
                                 val userTime: String = userInfo.userTime
 
-                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                val intent = Intent(this@LoginActivity, UserPrefAction::class.java)
                                 intent.putExtra("userInfo", userInfo)
                                 startActivity(intent)
                             }
