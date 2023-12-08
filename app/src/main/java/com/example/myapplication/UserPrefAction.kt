@@ -14,6 +14,7 @@ import com.example.ItemData.User_Pref_Item
 import com.example.retrofit.*
 import com.google.gson.JsonElement
 import kotlinx.android.synthetic.main.user_pref.*
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,7 +33,7 @@ class UserPrefAction: AppCompatActivity() {
 
         val userInfo: User_Info? = intent.getParcelableExtra("userInfo")
         val id: String? = intent.getStringExtra("id")
-        val pw: String? = intent.getStringExtra("pw")
+        //val pw: String? = intent.getStringExtra("pw")
 
         user_pref_list_rv.layoutManager = GridLayoutManager(this, 2)
         user_pref_list_rv.adapter = adapter
@@ -40,12 +41,13 @@ class UserPrefAction: AppCompatActivity() {
 
 
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://172.16.114.90:8000/")
+                .baseUrl("http://172.30.1.100:8000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         Log.d("실행안함1?", "뭐함?")
 
         val api = retrofit.create(RetrofitService2::class.java)
+        val api2 = retrofit.create(RetrofitService_UserPreferenceInsert::class.java)
         Log.d("실행안함?2", "뭐함?")
         if (Looper.myLooper() == Looper.getMainLooper()) {
             Log.d("ThreadCheck", "메인 쓰레드에서 실행 중")
@@ -71,11 +73,44 @@ class UserPrefAction: AppCompatActivity() {
                 Log.e("NetworkError", "네트워크 요청 실패", t)
             }
         })
+        //유처취향정보입력
+        fun savePreferencesToDB(selectedItems: Set<Int>) {
+            val userId = id.toString() // 사용자 ID
+            val preferenceIds = selectedItems.joinToString(",")
+            print("확인" + selectedItems)
+            val call = api2.postUserPreferences(userId, preferenceIds)
+
+
+            call.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    if (response.isSuccessful) {
+                        // 요청 성공
+                        Log.d("NetworkSuccess", "요청 성공") // 성공 로그 추가
+                        val intent = Intent(this@UserPrefAction, MainActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        // 서버에서 오류 메시지 반환
+                        val errorMsg = response.errorBody()?.string() ?: "Unknown error"
+                        Log.e("ServerError", "서버에서 오류 메시지 반환: $errorMsg") // 서버 오류 로그 추가
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    // 네트워크 오류 등
+                    Log.e("NetworkError2", "네트워크 요청 실패", t)
+                }
+            })
+        }
 
         user_pref_ok_bt.setOnClickListener{
             val selectedItems = adapter.getSelectedItems()
 
+            print("선택한 아이탬" + selectedItems)
+            savePreferencesToDB(selectedItems)
+            Log.d("확인버튼", "클릭")
+
         }
+
 
 
     }

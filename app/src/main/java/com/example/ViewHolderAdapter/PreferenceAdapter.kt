@@ -42,6 +42,7 @@ class PreferenceAdapter(
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onBindViewHolder(holder: PreferenceViewHolder, position: Int) {
+
         val preference = preferenceList[position]
         val isSelected = selectedItems.contains(preference.id)
         holder.bind(preference, isSelected)

@@ -16,6 +16,7 @@
                 android:backgroundTint="#999999"
                 android:gravity="center"
                 android:text="취향명"
+                android:hint="__"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold" />
