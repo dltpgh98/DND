@@ -1,13 +1,25 @@
 package com.example.ViewHolderAdapter
 
+import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ItemData.BookMark_Item
 import com.example.myapplication.databinding.BookmarkItemBinding
+import com.example.retrofit.Preference
 
-class Bookmark_RecyView_CustomAdapter(val book_ItemList : ArrayList<BookMark_Item>) : RecyclerView.Adapter<Bookmark_RecyView_CustomAdapter.ViewHolder>(){
+class Bookmark_RecyView_CustomAdapter(var book_ItemList : List<BookMark_Item>) : RecyclerView.Adapter<Bookmark_RecyView_CustomAdapter.ViewHolder>(){
+
+    private var context: Context? = null
+    constructor(book_ItemList: List<BookMark_Item>, context: Context) : this(book_ItemList) {
+        this.context = context
+    }
+
 
     interface ItemClick{  //클릭이벤트 추가부분
         fun onClick(view: View, position: Int)
@@ -22,24 +34,33 @@ class Bookmark_RecyView_CustomAdapter(val book_ItemList : ArrayList<BookMark_Ite
     override fun getItemCount(): Int {
         return book_ItemList.size
     }
-
     override fun onBindViewHolder(holder: Bookmark_RecyView_CustomAdapter.ViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
             itemClick?.onClick(it, position)
         }
-
-//        holder.img.drawable = book_ItemList[position].Img
-        holder.title.text = book_ItemList[position].title
-        holder.writer.text = book_ItemList[position].writer
-        holder.publisher.text = book_ItemList[position].publisher
-        holder.tag1.text = book_ItemList[position].tag1
-        holder.tag2.text = book_ItemList[position].tag2
-        holder.tag3.text = book_ItemList[position].tag3
-        holder.tag4.text = book_ItemList[position].tag4
-        holder.tag5.text = book_ItemList[position].tag5
-        holder.tag6.text = book_ItemList[position].tag6
-        holder.pickDate.text = book_ItemList[position].pickDate
+        // holder.img.drawable = Glide(book_ItemList[position].b_img)
+        Glide.with(context!!).load(book_ItemList[position].b_img);
+//        holder.img.setImageDrawable(Glide.with(context).load(book_ItemList[position].b_img))
+        holder.title.text = book_ItemList[position].b_name
+        holder.writer.text = book_ItemList[position].b_aut
+        holder.publisher.text = book_ItemList[position].b_ps
+        holder.shortInfo.text = book_ItemList[position].b_short
+        holder.pickDate.text = book_ItemList[position].b_regist.toString()
     }
+
+//    override fun onBindViewHolder(holder: Bookmark_RecyView_CustomAdapter.ViewHolder, position: Int) {
+//        holder.itemView.setOnClickListener {
+//            itemClick?.onClick(it, position)
+//        }
+//       // holder.img.drawable = Glide(book_ItemList[position].b_img)
+//        Glide.with(context).load(book_ItemList[position].b_img);
+//        holder.img.drawable
+//        holder.title.text = book_ItemList[position].b_name
+//        holder.writer.text = book_ItemList[position].b_aut
+//        holder.publisher.text = book_ItemList[position].b_ps
+//        holder.shortInfo.text = book_ItemList[position].b_short
+//        holder.pickDate.text = book_ItemList[position].b_regist.toString()
+//    }
 
 
     /*
@@ -50,12 +71,11 @@ class Bookmark_RecyView_CustomAdapter(val book_ItemList : ArrayList<BookMark_Ite
         val title = binding.bookmarkTitleTv
         val writer = binding.bookmarkWriterTv
         val publisher = binding.bookmarkPublisherTv
-        val tag1 = binding.bookmarkPreferTag1Tv
-        val tag2 = binding.bookmarkPreferTag2Tv
-        val tag3 = binding.bookmarkPreferTag3Tv
-        val tag4 = binding.bookmarkPreferTag4Tv
-        val tag5 = binding.bookmarkPreferTag5Tv
-        val tag6 = binding.bookmarkPreferTag6Tv
+        val shortInfo = binding.bookmarkShortTv
         val pickDate = binding.bookmarkDateTv
+    }
+    fun updateItems(newBookMarkItemList: List<BookMark_Item>) {
+        book_ItemList = newBookMarkItemList
+        notifyDataSetChanged()
     }
 }

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ItemData.MainBook_Item
 import com.example.myapplication.databinding.MainBookListItemBinding
+
 import kotlinx.android.synthetic.main.main_book_list_item.view.*
 
 /*

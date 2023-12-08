@@ -28,7 +28,9 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/radious_layout"
-        android:layout_marginHorizontal="5dp">
+        android:layout_marginHorizontal="5dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
         <ImageButton
             android:id="@+id/main_search_ibtn"
             android:layout_width="30sp"
