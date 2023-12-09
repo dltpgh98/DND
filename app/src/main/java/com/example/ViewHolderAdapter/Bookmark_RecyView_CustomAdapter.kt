@@ -1,17 +1,13 @@
 package com.example.ViewHolderAdapter
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ItemData.BookMark_Item
 import com.example.myapplication.databinding.BookmarkItemBinding
-import com.example.retrofit.Preference
 
 class Bookmark_RecyView_CustomAdapter(var book_ItemList : List<BookMark_Item>) : RecyclerView.Adapter<Bookmark_RecyView_CustomAdapter.ViewHolder>(){
 
