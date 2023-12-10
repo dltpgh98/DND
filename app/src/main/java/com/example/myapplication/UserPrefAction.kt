@@ -41,7 +41,7 @@ class UserPrefAction: AppCompatActivity() {
 
 
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://172.30.1.100:8000/")
+                .baseUrl("http://172.30.1.72:8000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         Log.d("실행안함1?", "뭐함?")

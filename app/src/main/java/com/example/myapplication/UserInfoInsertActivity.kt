@@ -20,6 +20,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -33,25 +34,26 @@ class UserInfoInsertActivity : AppCompatActivity(){
         var age = 0
         val today = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val currentDateTimeString = dateFormat.format(today.time)
+        val currentDateTimeString = dateFormat.format(today.time) + ".000000" // 마이크로초 직접 추가
         user_select_age_dp.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), null)
 
 
+
         val retrofit = Retrofit.Builder()
-                .baseUrl("http://172.30.1.100:8000/")
+                .baseUrl("http://172.30.1.72:8000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         val api = retrofit.create(RetrofitService_UserInfoInsert::class.java)
 
 
         user_gen_mr_bt.setOnClickListener {
-            it.setBackgroundResource(android.R.color.holo_blue_light)
-            user_gen_ms_bt.setBackgroundResource(android.R.color.darker_gray)
+            it.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_blue_light))
+            user_gen_ms_bt.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
             isClick = true
         }
         user_gen_ms_bt.setOnClickListener {
-            it.setBackgroundResource(android.R.color.holo_blue_light)
-            user_gen_mr_bt.setBackgroundResource(android.R.color.darker_gray)
+            it.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_blue_light))
+            user_gen_mr_bt.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
             isClick = false
         }
         user_select_age_dp.init(user_select_age_dp.year, user_select_age_dp.month, user_select_age_dp.dayOfMonth,
