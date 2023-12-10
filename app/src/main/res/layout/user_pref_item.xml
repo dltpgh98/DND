@@ -7,7 +7,6 @@
             android:layout_height="70dp"
             android:paddingHorizontal="60dp"
             android:paddingVertical="20dp">
-
             <TextView
                 android:id="@+id/pref_item_tv"
                 android:layout_width="match_parent"

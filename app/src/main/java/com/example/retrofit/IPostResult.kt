@@ -12,7 +12,6 @@ interface RetrofitService {
         @Query("id") id: String,
         @Query("pwd") pwd: String
     ): Call<PostResult>
-
 }
 
 interface RetrofitService2 {
@@ -45,4 +44,3 @@ interface RetrofitService_UserInfoInsert {
 
     ): Call<ResponseBody>
 }
-

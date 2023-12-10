@@ -13,7 +13,7 @@ class PostResult {
 
     @SerializedName("user_info")
     val user_info: User_Info?= null
-
+  
     // login_yn에 대한 getter 메서드
     fun getLoginYn(): String {
         return login_yn
@@ -23,7 +23,6 @@ class PostResult {
     fun getMessage(): String {
         return message
     }
-
      //toString()을 Override 해주지 않으면 객체 주소값을 출력함
     override fun toString(): String {
         return "PostResult{" +
@@ -32,7 +31,6 @@ class PostResult {
                 ", user_info=" + user_info +"}"
     }
 }
-
 
 
 data class User_Info (
