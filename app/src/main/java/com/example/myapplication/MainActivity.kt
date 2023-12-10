@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
 
 /*
         setContentView(R.layout.activity_main)
-
         txt_id.setOnClickListener{
             val text1 = txt_id.text.toString()
         }

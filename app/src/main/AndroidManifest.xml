@@ -17,12 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BookmarkActivity">
-            <intent-filter>
-                <!--                <action android:name="android.intent.action.MAIN" />-->
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".BookmarkActivity"></activity>UserInfoInsertActivity
+        <activity android:name=".UserPrefAction"></activity>
+        <activity android:name=".UserInfoInsertActivity"></activity>
     </application>
 
 </manifest>

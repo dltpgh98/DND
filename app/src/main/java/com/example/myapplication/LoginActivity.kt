@@ -4,15 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import com.example.retrofit.PostResult
 import com.example.retrofit.RetrofitService
-import db.main.MainDB
+import com.example.retrofit.User_Info
 import kotlinx.android.synthetic.main.login.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,9 +21,10 @@ class LoginActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
 
-        // 기본 URL
+        //val BASE_URL = "http://172.16.114.90:8000/" //이세호 학교
         val BASE_URL = "http://172.16.104.69:8000/"
-
+        val BASE_URL = "http://172.30.1.100:8000/" //이세호 집
+      
         // Retrofit 인터페이스를 구현한 서비스 인스턴스 생성 함수
         fun createRetrofitService(): RetrofitService {
             val retrofit = Retrofit.Builder()
@@ -50,6 +50,25 @@ class LoginActivity : AppCompatActivity(){
                         val login_yn = postResult?.getLoginYn()
                         val message = postResult?.getMessage()
                         if(login_yn == "y"){
+                            val userInfo: User_Info? = postResult?.user_info
+                            if (userInfo != null) {
+
+                                val userId: String = userInfo.userId
+                                val userPwd: String = userInfo.userPwd
+                                val userName: String = userInfo.userName
+                                val userNickname: String = userInfo.userNickname
+                                val userDivision: String = userInfo.userDivision
+                                val userGender: String = userInfo.userGender
+                                val userAge: Int = userInfo.userAge
+                                val userTime: String = userInfo.userTime
+
+                                val intent = Intent(this@LoginActivity, UserInfoInsertActivity::class.java)
+                                intent.putExtra("userInfo", userInfo)
+                                intent.putExtra("BASE_URL", BASE_URL)
+                                intent.putExtra("id", id)
+                                intent.putExtra("pw", pw)
+                                startActivity(intent)
+                            }
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
                         } else{
@@ -63,13 +82,6 @@ class LoginActivity : AppCompatActivity(){
                     println("호출 실패: ${t.message}")
                 }
             })
-
-
-
-        }
-
-        login_enter_tv.setOnClickListener{
-
         }
     }
 }
