@@ -35,7 +35,7 @@ class Bookmark_RecyView_CustomAdapter(var book_ItemList : List<BookMark_Item>) :
             itemClick?.onClick(it, position)
         }
         // holder.img.drawable = Glide(book_ItemList[position].b_img)
-        Glide.with(context!!).load(book_ItemList[position].b_img);
+        //Glide.with(context!!).load(book_ItemList[position].b_img);
 //        holder.img.setImageDrawable(Glide.with(context).load(book_ItemList[position].b_img))
         holder.title.text = book_ItemList[position].b_name
         holder.writer.text = book_ItemList[position].b_aut
