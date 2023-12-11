@@ -1,6 +1,7 @@
 package com.example.retrofit
 
 import com.example.ItemData.BookMark_Item
+import com.example.ItemData.MainBook_Item
 import com.google.gson.JsonElement
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -50,4 +51,11 @@ interface RetrofitService_UserInfoInsert {
     @Query("user_id") user_id: String
 
     ): Call<ResponseBody>
+}
+interface RetrofitService_GetBookSearch {
+    @GET("GetBookSearch")
+    fun getBookSearch(
+        @Query("book_name") book_name: String
+    ): Call<List<MainBook_Item>>
+
 }

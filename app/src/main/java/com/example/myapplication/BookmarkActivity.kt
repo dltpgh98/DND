@@ -25,6 +25,7 @@ class BookmarkActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.bookmark_frame)
+        val baseURL = "http://192.168.219.105:8000/"
 
         // 빈 어댑터 선언
         adapter = Bookmark_RecyView_CustomAdapter(emptyList())
@@ -40,7 +41,7 @@ class BookmarkActivity: AppCompatActivity() {
         bookmark_list_rv.adapter = adapter
         // Retrofit 객체 생성 및 API 인터페이스 가져오기
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.219.105:8000/")
+            .baseUrl(baseURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

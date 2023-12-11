@@ -1,9 +1,11 @@
 package com.example.ViewHolderAdapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ItemData.BookMark_Item
 import com.example.ItemData.MainBook_Item
 import com.example.myapplication.databinding.MainBookListItemBinding
 import kotlinx.android.synthetic.main.main_book_list_item.view.*
@@ -13,7 +15,13 @@ https://jutole.tistory.com/9
 참조
  */
 
-class MainRecyView_CustomAdapter(val book_ItemList : ArrayList<MainBook_Item>) : RecyclerView.Adapter<MainRecyView_CustomAdapter.ViewHolder>() {
+class MainRecyView_CustomAdapter(var book_ItemList : List<MainBook_Item>) : RecyclerView.Adapter<MainRecyView_CustomAdapter.ViewHolder>() {
+
+    private var context: Context? = null
+    constructor(book_ItemList: List<MainBook_Item>, context: Context) : this(book_ItemList) {
+        this.context = context
+    }
+
 
     interface ItemClick{  //클릭이벤트 추가부분
         fun onClick(view: View, position: Int)
@@ -35,12 +43,14 @@ class MainRecyView_CustomAdapter(val book_ItemList : ArrayList<MainBook_Item>) :
         holder.itemView.setOnClickListener {
             itemClick?.onClick(it, position)
         }
-        holder.tag1.text = book_ItemList[position].tag1
-        holder.tag2.text = book_ItemList[position].tag2
-        holder.tag3.text = book_ItemList[position].tag3
-//        holder.img.drawable = book_ItemList[position].Img
-        holder.title.text = book_ItemList[position].Title
-        holder.writer.text = book_ItemList[position].Writer
+        var bookPref = book_ItemList[position].p_names
+        holder.tag1.text = bookPref[0]
+        holder.tag2.text = bookPref[1]
+        holder.tag3.text = bookPref[2]
+//        holder.tag3.text = book_ItemList[position].bookPref[2]
+//        holder.img.drawable = book_ItemList[position].b_img
+        holder.title.text = book_ItemList[position].b_name
+        holder.writer.text = book_ItemList[position].b_aut
     }
     /*
     값을 넣어줄 객체들을 입력
@@ -53,5 +63,8 @@ class MainRecyView_CustomAdapter(val book_ItemList : ArrayList<MainBook_Item>) :
         val title = binding.mainBookTitleTv
         val writer = binding.mainWriterTv
     }
-
+    fun updateItems(newBookItemList: List<MainBook_Item>){
+        book_ItemList = newBookItemList;
+        notifyDataSetChanged()
+    }
 }
