@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ItemData.BookMark_Item
@@ -26,79 +25,66 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
-//    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
     private lateinit var adapter: MainRecyView_CustomAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(binding.root)
         setContentView(R.layout.main_frame)
-        val baseURL = "http://192.168.219.105:8000/"
 
-        main_floating_fbtn.setOnClickListener{
-            val intent = Intent(this, BookmarkActivity::class.java)
-            startActivity(intent)
-        }
+        // Retrofit 설정
+        val baseURL = "http://192.168.219.105:8000/"
         val retrofit = Retrofit.Builder()
             .baseUrl(baseURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+        // 리사이클러뷰 설정
         adapter = MainRecyView_CustomAdapter(emptyList())
-        main_book_list_rv.layoutManager = GridLayoutManager(this,2)
+        main_book_list_rv.layoutManager = GridLayoutManager(this, 2)
         main_book_list_rv.adapter = adapter
+
+        main_floating_fbtn.setOnClickListener{
+            val intent = Intent(this, BookmarkActivity::class.java)
+            startActivity(intent)
+        }
+        // 서버 통신
         val api = retrofit.create(RetrofitService_GetBookSearch::class.java)
 
-        var searchBook = "";
-        // 스레드 확인 로그
-        if (Looper.myLooper() == Looper.getMainLooper()) {
-            Log.d("ThreadCheck", "메인 쓰레드에서 실행 중")
-        } else {
-            Log.d("ThreadCheck", "메인 쓰레드가 아닌 곳에서 실행 중")
+        var searchBook = ""
+        getItemsFromServer(searchBook,api)
+        // 버튼 클릭 이벤트 리스너
+        findViewById<ImageButton>(R.id.main_search_ibtn).setOnClickListener {
+            // 검색어를 입력받습니다.
+            searchBook = findViewById<EditText>(R.id.main_search_bar_et).text.toString()
+            getItemsFromServer(searchBook,api)
+
         }
-//        val book_ItemList = ArrayList<MainBook_Item>()
-        // 서버 통신 - 북마크 목록 가져오기
+
+        adapter.itemClick = object : MainRecyView_CustomAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                // 선택된 아이템의 데이터 가져오기
+                Toast.makeText(this@MainActivity,"선택: $view",Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+    private fun getItemsFromServer(searchBook: String = "",api: RetrofitService_GetBookSearch) {
+        // 서버에 검색 요청을 보냅니다.
         api.getBookSearch(searchBook).enqueue(object : Callback<List<MainBook_Item>> {
             override fun onResponse(call: Call<List<MainBook_Item>>, response: Response<List<MainBook_Item>>) {
                 // 통신 성공 시
                 Log.d("통신 성공", "북마크 목록 가져옴")
                 val bookItemList = response.body()
                 if (bookItemList != null) {
-                    Log.d("실행안함?4", "뭐함?")
                     // 어댑터에 데이터 설정 및 리사이클러뷰에 연결
                     adapter.updateItems(bookItemList)
-                    print("실행함?")
-                } else {
-                    Log.d("실행안함?5", "뭐함?")
                 }
             }
+
             override fun onFailure(call: Call<List<MainBook_Item>>, t: Throwable) {
                 // 통신 실패 시
                 Log.e("통신 실패", t.message.toString())
             }
         })
-//        val adapter = MainRecyView_CustomAdapter(bookItemList)
-
-//        main_book_list_rv.adapter = MainRecyView_CustomAdapter(book_ItemList)
-//        main_book_list_rv.layoutManager = LinearLayoutManager(this)
-
-        adapter.itemClick = object : MainRecyView_CustomAdapter.ItemClick {
-            override fun onClick(view: View, position: Int) {
-                Toast.makeText(this@MainActivity,"선택",Toast.LENGTH_LONG).show()
-            }
-        }
-
-
-//        setContentView(R.layout.db_main)
-
-//        setContentView(R.layout.login)
-
-/*
-        setContentView(R.layout.activity_main)
-        txt_id.setOnClickListener{
-            val text1 = txt_id.text.toString()
-        }
-*/
-
     }
 }

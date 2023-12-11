@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ItemData.BookMark_Item
 import com.example.ItemData.MainBook_Item
 import com.example.myapplication.databinding.MainBookListItemBinding
@@ -49,6 +50,9 @@ class MainRecyView_CustomAdapter(var book_ItemList : List<MainBook_Item>) : Recy
         holder.tag3.text = bookPref[2]
 //        holder.tag3.text = book_ItemList[position].bookPref[2]
 //        holder.img.drawable = book_ItemList[position].b_img
+//        print("test: $book_ItemList[position].b_img")
+        var url = book_ItemList[position].b_img
+        Glide.with(holder.itemView).load(url).into(holder.img)
         holder.title.text = book_ItemList[position].b_name
         holder.writer.text = book_ItemList[position].b_aut
     }

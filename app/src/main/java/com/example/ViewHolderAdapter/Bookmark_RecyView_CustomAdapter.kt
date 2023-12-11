@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 //import com.bumptech.glide.Glide
 import com.example.ItemData.BookMark_Item
 import com.example.myapplication.databinding.BookmarkItemBinding
+
 
 class Bookmark_RecyView_CustomAdapter(var book_ItemList : List<BookMark_Item>) : RecyclerView.Adapter<Bookmark_RecyView_CustomAdapter.ViewHolder>(){
 
@@ -35,13 +37,19 @@ class Bookmark_RecyView_CustomAdapter(var book_ItemList : List<BookMark_Item>) :
             itemClick?.onClick(it, position)
         }
         // holder.img.drawable = Glide(book_ItemList[position].b_img)
-        //Glide.with(context!!).load(book_ItemList[position].b_img);
+//        var url = book_ItemList[position].b_img
+//        print("test: $book_ItemList")
+//        Glide.with(holder.itemView).load(url).into(holder.img);
+
 //        holder.img.setImageDrawable(Glide.with(context).load(book_ItemList[position].b_img))
         holder.title.text = book_ItemList[position].b_name
         holder.writer.text = book_ItemList[position].b_aut
         holder.publisher.text = book_ItemList[position].b_ps
         holder.shortInfo.text = book_ItemList[position].b_short
         holder.pickDate.text = book_ItemList[position].b_regist.toString()
+        var url = book_ItemList[position].b_img
+        Glide.with(holder.itemView).load(url).error("@drawable/book_img").into(holder.img)
+
         holder.pref.text = book_ItemList[position].p_names
     }
 
