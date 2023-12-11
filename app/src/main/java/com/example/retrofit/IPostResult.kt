@@ -1,5 +1,6 @@
 package com.example.retrofit
 
+import com.example.ItemData.BookMark_Item
 import com.google.gson.JsonElement
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -23,7 +24,13 @@ interface RetrofitService2 {
     ): Call<List<Preference>>
 
 }
+interface RetrofitService_GetUserBookmarkList{
+    @GET("GetUserBookmarkList")
+    fun getUserBookmarkList(
+        @Query("user_id") user_id: String
+    ): Call<List<BookMark_Item>>
 
+}
 interface RetrofitService_UserPreferenceInsert {
     @GET("PostUserPreferences")
     fun postUserPreferences(

@@ -22,8 +22,9 @@ class LoginActivity : AppCompatActivity(){
         setContentView(R.layout.login)
 
         //val BASE_URL = "http://172.16.114.90:8000/" //이세호 학교
-        val BASE_URL = "http://172.16.104.69:8000/"
-        val BASE_URL = "http://172.30.1.100:8000/" //이세호 집
+//        val BASE_URL = "http://172.16.104.69:8000/"
+//        val BASE_URL = "http://172.30.1.100:8000/" //이세호 집
+        val BASE_URL = "http://192.168.219.105:8000/" //도성대 집
       
         // Retrofit 인터페이스를 구현한 서비스 인스턴스 생성 함수
         fun createRetrofitService(): RetrofitService {
